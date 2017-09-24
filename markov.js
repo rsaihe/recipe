@@ -1,8 +1,3 @@
-String.prototype.replaceAll = function(search, replacement) {
-    var target = this;
-    return target.replace(new RegExp(search, 'g'), replacement);
-};
-
 function markov(prev, probs) {
     if (probs.hasOwnProperty(prev)) {
         return probs[prev][Math.floor(Math.random() * probs[prev].length)];
