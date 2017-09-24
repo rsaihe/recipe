@@ -1,0 +1,43 @@
+html, body {
+    margin: 0;
+}
+
+body {
+    background-color: #52B3D9;
+    color: #22313F;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Open Sans', sans-serif;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #36D7B7;
+    height: 106px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 40px;
+    text-shadow: 2px 2px 0px #68C3A3;
+}
+
+main {
+    flex: 1;
+}
+
+h2 {
+    text-align: center;
+}
+
+#controls, #output {
+    background-color: #C8F7C5;
+    margin: 0 auto;
+    padding: 10px;
+    width: 90%;
+}
+
+footer p {
+    padding-right: 20px;
+    text-align: right;
+}

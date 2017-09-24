@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf8">
+    <meta name="author" content="xithiox">
+    <title>Markov Chains</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans"
+    rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <script src="probs.js"></script>
+    <script src="probs_cooking.js"></script>
+    <script src="probs_char.js"></script>
+    <script src="markov.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>Markov chains</h1>
+    </header>
+
+    <main>
+      <h2>Controls</h2>
+      <div id="controls">
+        <p>
+          Text type:
+          <select id="type">
+            <option value="char">Characters</option>
+            <option value="love">Lovecraft</option>
+            <option value="recipe" selected>Recipe</option>
+          </select>
+        </p>
+        <p>
+          Count:
+          <input type="number" id="count" min="1" max="2000" value="200">
+        </p>
+        <p>
+          Precision:
+          <input type="number" id="precision" min="1" max="10" value="1">
+        </p>
+        <p>
+          <button onclick="generate()">Generate text!</button>
+        </p>
+      </div>
+      <h2>Output</h2>
+      <div id="output">
+        <p id="output-text">&nbsp;</p>
+      </div>
+    </main>
+    <footer>
+      <p id="copyright">&copy; 2017, xithiox</p>
+    </footer>
+  </body>
+</html>
