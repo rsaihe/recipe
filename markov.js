@@ -79,9 +79,9 @@ function markovGen(count, probs, prev_count, sep) {
 }
 
 function scanCustom() {
-    var text = document.getElementById('custom-text').value;
-    probs_cust = scan(text);
-    probs_cust_char = scanChar(text);
+    var custText = document.getElementById('custom-text').value;
+    probs_cust = scan(custText);
+    probs_cust_char = scanChar(custText);
 }
 
 function generate() {
@@ -101,9 +101,13 @@ function generate() {
             text = doRecipe(count, prec);
             break;
         case 'cust':
+            var custText = document.getElementById('custom-text').value;
+            probs_cust = scan(custText);
             text = doCustom(count, prec);
             break;
         case 'custchar':
+            var custText = document.getElementById('custom-text').value;
+            probs_cust_char = scanChar(custText);
             text = doCustomChars(count, prec);
             break;
     }
