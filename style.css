@@ -39,6 +39,10 @@ h2 {
     width: 90%;
 }
 
+#output-text {
+    word-break: break-all;
+}
+
 #main-controls, #scan {
     flex: 1;
 }

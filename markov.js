@@ -1,5 +1,6 @@
-var probs_cust;
-var probs_cust_char;
+let probs_cust;
+let probs_cust_char;
+let toUpdate = false;
 
 function markov(prev, probs) {
     if (probs.hasOwnProperty(prev)) {
@@ -14,13 +15,13 @@ function scan(text, probs) {
         probs = [{}, {}, {}, {}];
     }
 
-    var words = text.split(/\s+/);
-    for (var i = 0; i < 4; ++i) {
-        var prevs = new Array(i + 1);
+    let words = text.split(/\s+/);
+    for (let i = 0; i < 4; ++i) {
+        let prevs = new Array(i + 1);
         prevs.fill('');
-        for (var w = 0; w < words.length; ++w) {
-            var word = words[w];
-            var prev = prevs.join(' ');
+        for (let w = 0; w < words.length; ++w) {
+            let word = words[w];
+            let prev = prevs.join(' ');
             if (!probs[i].hasOwnProperty(prev)) {
                 probs[i][prev] = [];
             }
@@ -38,13 +39,13 @@ function scanChar(text, probs) {
         probs = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
     }
 
-    var words = text.split('');
-    for (var i = 0; i < 10; ++i) {
-        var prevs = new Array(i + 1);
+    let words = text.split('');
+    for (let i = 0; i < 10; ++i) {
+        let prevs = new Array(i + 1);
         prevs.fill('');
-        for (var w = 0; w < words.length; ++w) {
-            var word = words[w];
-            var prev = prevs.join('');
+        for (let w = 0; w < words.length; ++w) {
+            let word = words[w];
+            let prev = prevs.join('');
             if (!probs[i].hasOwnProperty(prev)) {
                 probs[i][prev] = [];
             }
@@ -58,19 +59,19 @@ function scanChar(text, probs) {
 }
 
 function markovGen(count, probs, prev_count, sep) {
-    var prevs = new Array(prev_count).fill('');
-    var wordlist = [];
+    let prevs = new Array(prev_count).fill('');
+    let wordlist = [];
     if (typeof probs === 'undefined') return '&nbsp';
 
-    for (var i = 0; i < count; ++i) {
-        var prev = prevs.join(sep);
-        var word = markov(prev, probs[prev_count - 1]);
+    for (let i = 0; i < count; ++i) {
+        let prev = prevs.join(sep);
+        let word = markov(prev, probs[prev_count - 1]);
         prevs.shift();
         prevs.push(word);
         wordlist.push(word);
     }
 
-    var output = wordlist.join(sep);
+    let output = wordlist.join(sep);
     if (/^\s*$/.test(output)) {
         return '&nbsp;'
     } else {
@@ -79,17 +80,25 @@ function markovGen(count, probs, prev_count, sep) {
 }
 
 function scanCustom() {
-    var custText = document.getElementById('custom-text').value;
+    let custText = document.getElementById('custom-text').value;
     probs_cust = scan(custText);
     probs_cust_char = scanChar(custText);
 }
 
 function generate() {
-    var type = document.getElementById('type').value;
-    var count = parseInt(document.getElementById('count').value);
-    var prec = parseInt(document.getElementById('precision').value);
+    // Update custom text
+    if (toUpdate) {
+        let custText = document.getElementById('custom-text').value;
+        probs_cust = scan(custText)
+        probs_cust_char = scanChar(custText);
+        toUpdate = false;
+    }
+
+    let type = document.getElementById('type').value;
+    let count = parseInt(document.getElementById('count').value);
+    let prec = parseInt(document.getElementById('precision').value);
     prec = prec < 1 ? 1 : prec;
-    var text;
+    let text;
     switch (type) {
         case 'char':
             text = doChars(count, prec);
@@ -101,13 +110,9 @@ function generate() {
             text = doRecipe(count, prec);
             break;
         case 'cust':
-            var custText = document.getElementById('custom-text').value;
-            probs_cust = scan(custText);
             text = doCustom(count, prec);
             break;
         case 'custchar':
-            var custText = document.getElementById('custom-text').value;
-            probs_cust_char = scanChar(custText);
             text = doCustomChars(count, prec);
             break;
     }
