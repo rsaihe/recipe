@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
     margin: 0;
 }
 
@@ -30,7 +31,8 @@ h2 {
     text-align: center;
 }
 
-#controls, #output {
+#controls,
+#output {
     background-color: #C8F7C5;
     display: flex;
     flex-direction: row;
@@ -39,11 +41,8 @@ h2 {
     width: 90%;
 }
 
-#output-text {
-    word-break: break-all;
-}
-
-#main-controls, #scan {
+#main-controls,
+#scan {
     flex: 1;
 }
 
